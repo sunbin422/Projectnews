@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+      function  Func(name,age) {
+          this.name=name;
+          this.age=age;
+      }
+         Func.prototype.types=function(){
+            alert("5")
+
+         }
+         function  jjun(name,age) {
+             this.name=name;
+             this.age=age;
+         }
+         jjun.prototype.getjss=function () {
+             return this.name;
+         }
+
+
+      jjun.prototype=new Func("王子",2);
+        var j1=new jjun("王",2);
+        j1.types();
+
+
+
+
+    </script>
+</head>
+<body>
+ssss
+</body>
+</html>
