@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+        function select() {
+          window.location.href="/Servlet?action=select&select="+$("#data").val();
+
+        }
+        </script>
+</head>
+<body>
+<h1>考勤系统</h1>
+选择时间 <input id="data" type="date" value="2014-01-13" /><button onclick="select()">确定</button>
+
+</body>
+</html>

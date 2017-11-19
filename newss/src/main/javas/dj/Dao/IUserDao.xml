@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dj.Dao.IUserDao">
+
+    <resultMap id="resultMap2" type="dj.entity.attendanceInfo">
+        <id property="studentattendaneid" column="studentattendaneid"></id>
+        <result property="studentid" column="studentid"></result>
+        <result property="attendancetime" column="attendancetime"></result>
+        <result property="attendance" column="attendance"></result>
+        <association property="studentInfo" javaType="dj.entity.studentInfo" >
+            <id property="studentId" column="studentId"></id>
+            <result property="studentName" column="studentName"></result>
+        </association>
+    </resultMap>
+    <select id="login" resultType="int">
+        SELECT count(*) FROM  user WHERE user=#{0} AND pwd=#{1}
+    </select>
+    <select id="list" resultType="dj.entity.classesInfo">
+        SELECT * FROM classes
+
+    </select>
+    <select id="listren" resultType="dj.entity.studentInfo" >
+        SELECT * FROM student WHERE classId=#{0}
+    </select>
+    <insert id="insert" >
+        INSERT INTO studentattendance (studentid,attendancetime,attendance) VALUES (#{0},#{1},#{2})
+    </insert>
+    <select id="lists"  resultMap="resultMap2">
+        SELECT  * FROM studentattendance as a, student as b WHERE a.studentid=b.studentId AND a.attendancetime=#{0}
+
+
+    </select>
+</mapper>

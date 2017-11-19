@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+        function  bu() {
+
+            var url="/Servlet?action=login";
+            alert(2);
+            var pwd=$("#pwds").val();
+
+            alert(1);
+            var users=$("#users").val();
+            $.ajax({
+                type: "post",
+                url: url,
+                data: {"user": users , "pwd": pwd},
+                success: function (date) {
+
+                    if(date=="账号密码错误"){
+                        alert(date);
+                    }else {
+                        alert(date);
+                        window.location.href="/Servlet?action=yes";
+                    }
+
+                },
+                error: function () {
+                    alert(11);
+                }
+            });
+        }
+
+
+    </script>
+</head>
+<body>
+
+<form>
+    账号：<input id="users" type="text" />
+    <br>
+    密码：<input  id="pwds" type="password" />
+    <br>
+    <input type="button" onclick="bu()" value="登陆"/>
+    <input type="reset" value="重置"/>
+</form>
+
+
+
+</body>
+</html>

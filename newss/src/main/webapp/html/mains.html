@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+           function butt(){
+
+                var w=$("#one").val();
+                var s=w.substring(w.length-1,w.length);
+                alert(w.substring(w.length-1,w.length));
+             window.location.href="/Servlet?action=listren&cid="+s;
+
+           }
+
+        </script>
+</head>
+<body>
+
+<h1>欢迎来到考勤系统</h1>
+<select id="one">
+    <option id="0">请选择</option>
+    <#list list as item>
+        <option id="">${item.className}<span hidden>${item.cid}</span></option>
+    </#list>
+</select> <button id="butt" onclick="butt()" value="确定">确定</button>
+</body>
+</html>

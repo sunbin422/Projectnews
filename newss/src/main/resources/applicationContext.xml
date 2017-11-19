@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+
+
+
+         http://www.springframework.org/schema/context
+
+  http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="SomeService" class="SomeService" scope="prototype"></bean>
+    <bean id="car" class="Car">
+
+    </bean>
+    <bean id="inss" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" value="page"></property>
+        <property name="serviceName" value="sun"></property>
+        <property name="registryPort" value="50000"></property>
+        <property name="serviceInterface" value="page"></property>
+    </bean>
+
+    <bean id="student" class="Student">
+
+
+    </bean>
+    <bean id="ink" class="Ink.InkColor"></bean>
+    <bean id="page" class="page.pageA4"></bean>
+    <bean id="print" class="Print">
+        <property name="page" ref="ink"></property>
+        <property name="pages" ref="page"></property>
+    </bean>
+
+    <bean id="map" class="pro">
+        <property name="map">
+            <map key-type="java.lang.String" value-type="java.lang.String">
+                <entry key="1" value="2"></entry>
+                <entry key="2" value="3"></entry>
+                <entry key="3" value="4"></entry>
+            </map>
+        </property>
+    </bean>
+    <context:component-scan base-package="java" ></context:component-scan>
+<context:annotation-config></context:annotation-config>
+</beans>

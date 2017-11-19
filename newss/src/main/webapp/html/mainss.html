@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-1.12.4.js"></script>
+    <script type="text/javascript">
+        function btts() {
+            var inputs = document.getElementsByTagName('input')
+            var values=""
+            for(i=0; i<inputs.length; i++) {
+               var obj = inputs[i];
+               var t = obj.getAttribute("type");
+                if(t=='radio' && obj.checked){
+                 var   v = obj.getAttribute("value");
+                    values += v+",";
+                }
+            }
+          window.location.href="/Servlet?action=insert&at="+values;
+        }
+        </script>
+</head>
+<body>
+     <h1>考勤系统</h1>
+    选择时间 <input  type="date" value="2014-01-13" />确定</button>
+   <h2>学员姓名</h2>
+       <table>
+           <#list lists as item>
+           <tr>
+               <td>${item.studentName}</td>
+               <td><input type="radio" name="${item.studentId}" value="${item.studentId}c">出勤</td>
+               <td><input type="radio" name="${item.studentId}" value="${item.studentId}w">未出勤</td>
+               <td><input type="radio" name="${item.studentId}" value="${item.studentId}s">事假</td>
+               <td><input type="radio" name="${item.studentId}" value="${item.studentId}b">病假</td>
+           </tr>
+           </#list>
+       </table>
+  <button onclick="btts()">提交</button>
+</body>
+</html>

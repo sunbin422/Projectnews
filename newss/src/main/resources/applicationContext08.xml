@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+
+
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://www.springframework.org/schema/aop
+
+ http://www.springframework.org/schema/aop/spring-aop.xsd
+
+         http://www.springframework.org/schema/context
+
+         http://www.springframework.org/schema/tx">
+
+    <context:property-placeholder location="jdbcs.properties"></context:property-placeholder>
+
+       <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.DriverClassName}"></property>
+           <property name="url" value="${jdbc.url}"></property>
+           <property name="username" value="${jdbc.username}"></property>
+           <property name="password" value="${jdbc.password}"></property>
+       </bean>
+
+
+    <bean id="Account" class="bdqn.dao.AccountImpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <bean id="socke" class="bdqn.dao.SockeImpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+   <bean id="service" class="bdqn.service.AccServiceImpl">
+       <property name="acc" ref="Account"></property>
+       <property name="socke" ref="socke"></property>
+   </bean>
+    <!-- 事务管理器-->
+    <bean id="tranManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+     
+    <!--事务代理工厂-->
+    <!--<bean id="beanfactory" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="tranManager"></property>
+        <property name="target" ref="service"></property>
+        <property name="transactionAttributes">
+            <props >
+                <prop key="set">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-Exception</prop>
+            </props>
+        </property>
+    </bean>-->
+
+    <tx:advice id="txadvice" transaction-manager="tranManager">
+        <tx:attributes>
+            <tx:method name="Acc*"  isolation="DEFAULT"  propagation="REQUIRED"  rollback-for="expection"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="mypoint" expression="execution(* *..service.*.*(..))"/>
+        <aop:advisor advice-ref="txadvice" pointcut-ref="mypoint"></aop:advisor>
+    </aop:config>
+</beans>

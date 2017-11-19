@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+                    <h1>欢迎来到考勤系统</h1>
+           <table>
+               <tr>
+                   <#list list as item>
+                   <td>${item.className}</td>
+                   </#list>
+               </tr>
+           </table>
+             <select>
+                 <option>请选择</option>
+                 <#list list as item>
+                 <option>${item.className}</option>
+                 </#list>
+             </select>
+
+</body>
+</html>
